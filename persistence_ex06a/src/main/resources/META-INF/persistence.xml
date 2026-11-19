@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.2"
+             xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+                    https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd ">
+   <!--
+   unidade de persistência cujo nome será utilizado na chamada de
+   Persistence.createEntityManagerFactory() para iniciar a execução da
+   aplicação com Jakarta Persistence
+   -->
+   <persistence-unit name="TESTE06" transaction-type="RESOURCE_LOCAL">
+      <!-- 'provider' da implementação JPA (Jakarta Persistence) -->
+      <!-- EclipseLink -->
+      <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+      <!-- consultas nomeadas (named queries) -->
+<!--
+      <mapping-file></mapping-file>
+-->
+
+      <!--
+      classes do Modelo de Objetos (entidades) que serão "melhoradas" (enhanced)
+      para utilização pela API Jakarta Persistence
+      -->
+      <class>br.edu.ifpr.persistence_ex06a.model.Dados</class>
+      <class>br.edu.ifpr.persistence_ex06a.model.OutrosDados</class>
+
+      <!-- classes que não estejam listadas acima e integram o projeto não -->
+      <!-- serão "melhoradas" -->
+      <exclude-unlisted-classes/>
+
+      <!--
+      A) CONTROLA COMO E SE VALIDAÇÃO É REALIZADA EM OBJETOS DAS ENTIDADES DE
+         PERSISTÊNCIA;
+      B) ESTE ELEMENTO CONTROLA OUTROS ELEMENTOS QUE PERMITEM REALIZAR
+         VALIDAÇÕES ESPECÍFICAS NA INCLUSÃO E/OU ALTERAÇÃO E/OU EXCLUSÃO (QUE
+         ESTÃO LOGO ABAIXO).
+      AUTO
+         Jakarta Persistence verifica se há uma implementação Jakarta Validator
+         no classpath. Se houver, a validação ocorre automaticamente, caso
+         contrário, faz nada.
+      CALLBACK
+         Neste caso, uma implementação Jakarta Validator DEVE estar presente
+         para que a validação ocorra e ela acontecerá ANTES da inclusão,
+         atualização e exclusão. Se uma implementação não estiver disponível,
+         o 'provider' (implementação) lançará uma excessão.
+      NONE
+         As validações automáticas são "desligadas" e qualquer anotação Jakarta
+         Validator nas classes de entidade são ignoradas.
+      -->
+<!-- -->
+      <validation-mode>NONE</validation-mode>
+<!-- -->
+
+      <!--
+      SE A VALIAÇÃO ESTIVER ATIVA (VER ELEMENTO "validation-mode"), É POSSÍVEL
+      DEFINIR GRUPOS DE VALIDAÇÃO CUSTOMIZADOS. A VALIDAÇÃO PADRÃO TAMBÉM PODE
+      SER DEFINIDA JUNTO COM OUTRAS.
+      VALIDAÇÃO PADRÃO "jakarta.validation.groups.Default"
+      -->
+<!--
+         <property name="jakarta.persistence.validation.group.pre-persist"
+                   value=""/>
+         <property name="jakarta.persistence.validation.group.pre-update"
+                   value=""/>
+         <property name="jakarta.persistence.validation.group.pre-remove"
+                   value=""/>
+ -->
+
+      <properties>
+         <property name="jakarta.persistence.jdbc.url"
+                   value="jdbc:mysql://localhost:3406/TESTE06?createDatabaseIfNotExist=true&amp;useSSL=false&amp;allowPublicKeyRetrieval=true"/>
+         <property name="jakarta.persistence.jdbc.driver"
+                   value="com.mysql.cj.jdbc.Driver"/>
+         <property name="jakarta.persistence.jdbc.user"
+                   value="root"/>
+         <property name="jakarta.persistence.jdbc.password"
+                   value="ifpraluno"/>
+
+         <!-- apaga e cria a base de dados -->
+         <property name="jakarta.persistence.schema-generation.database.action"
+                   value="drop-and-create"/>
+
+         <!-- apaga e cria os arquivos de script -->
+<!--
+         <property name="jakarta.persistence.schema-generation.scripts.action"
+                   value="drop-and-create"/>
+-->
+         <!-- script para criação das tabelas -->
+<!--
+         <property name="jakarta.persistence.schema-generation.scripts.create-target"
+                   value=""/>
+-->
+         <!-- script para excluir as tabelas -->
+<!--
+         <property name="jakarta.persistence.schema-generation.scripts.drop-target"
+                   value=""/>
+-->
+         <!-- script com dados a serem carregados nas tabelas -->
+<!--
+         <property name="jakarta.persistence.sql-load-script-source"
+                   value="META-INF/treinamento-insert-data.sql"/>
+-->
+<!--
+         <property name="jakarta.persistence.sql-load-script-source"
+                   value="META-INF/sql/data.sql" />
+-->
+         <!-- EclipseLink-->
+         <!-- valida o arquivo META-INF/persistence.xml e, se existir, -->
+         <!-- o arquivo META-INF/orm.xml -->
+<!--
+         <property name="eclipselink.orm.validate.schema" value="true"/>
+-->
+         <!-- grava no arquivo especificado os logs de execução -->
+<!--
+         <property name="eclipselink.logging.file" value="output.log"/>
+-->
+         <!-- desabilita (OFF) ou habilita (SEVERE, WARNING, INFO, CONFIG, -->
+         <!-- FINE, FINER, FINEST, ALL) o log -->
+<!--
+         <property name="eclipselink.logging.level" value="OFF"/>
+-->
+<!--
+         <property name="eclipselink.target-server" value="None"/>
+-->
+         <!-- a propriedade a seguir é opcional ('database' é padrão) -->
+<!--
+         <property name="eclipselink.ddl-generation.output-mode"
+                   value="database"/>
+         <property name="eclipselink.ddl-generation.output-mode"
+                   value="sql-script"/>
+         <property name="eclipselink.create-ddl-jdbc-file-name"
+                   value="treinamento-create-ddl.sql"/>
+         <property name="eclipselink.drop-ddl-jdbc-file-name"
+                   value="treinamento-drop-ddl.sql"/>
+         <property name="eclipselink.application-location"
+                   value="F:/desenvolvimento/java/eclipse/__ws__java/treinamento-jpa-el/src/br/edu/ifpr/resources/sql"/>
+         <property name="eclipselink.ddl-generation"
+                   value="drop-and-create-tables"/>
+         <property name="eclipselink.weaving" value="static"/>
+         <!-
+         Configura o logging
+         ->
+-->
+         <property name="eclipselink.logging.level" value="INFO"/>
+         <property name="eclipselink.logging.level.sql" value="FINE"/>
+         <property name="eclipselink.logging.parameters" value="true"/>
+         <property name="eclipselink.eclipselink.target-database"
+                   value="MySQL"/>
+      </properties>
+   </persistence-unit>
+</persistence>

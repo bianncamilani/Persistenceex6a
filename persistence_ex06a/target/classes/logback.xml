@@ -1,0 +1,22 @@
+<configuration>
+   <!-- formato da saída do log no Console -->
+   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder>
+         <pattern>
+            %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+         </pattern>
+      </encoder>
+   </appender>
+
+   <!-- nível de log padrão da aplicação -->
+   <root level="INFO">
+      <appender-ref ref="CONSOLE" />
+   </root>
+
+   <!-- reduz a verbosidade do Testcontainers (exibe apenas avisos e erros) -->
+   <logger name="org.testcontainers" level="WARN" />
+   <logger name="com.github.dockerjava" level="WARN" />
+
+   <!-- ajusta o log dos pacotes para exibições detalhadas (DEBUG) -->
+   <logger name="br.edu.ifpr.persistence_ex06" level="DEBUG" />
+</configuration>
